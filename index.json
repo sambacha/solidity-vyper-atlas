@@ -1,0 +1,334 @@
+[
+  {
+    "Feature": "Version",
+    "Solidity": "$ solc --version\nVersion: 0.6.12",
+    "Vyper": "$ vyper --version\n0.2.3"
+  },
+  {
+    "Feature": "General notes on syntax",
+    "Solidity": "Solidity loosely borrows its syntax from Javascript and C",
+    "Vyper": "Vyper syntax is valid Python 3 syntax (but the opposite is not true)"
+  },
+  {
+    "Feature": "Block delimiters",
+    "Solidity": "{ }",
+    "Vyper": ":  # Vyper uses Python's off-side rule"
+  },
+  { "Feature": "Statement separator", "Solidity": ";", "Vyper": "\\n' and :" },
+  {
+    "Feature": "End of line comment",
+    "Solidity": "// comment",
+    "Vyper": "# comment"
+  },
+  {
+    "Feature": "Multiple line comment",
+    "Solidity": "/* multiple line\ncomment */",
+    "Vyper": "# Multiple line\n# comment"
+  },
+  {
+    "Feature": "Constant",
+    "Solidity": "uint constant TOTAL_SUPPLY = 10000000;",
+    "Vyper": "TOTAL_SUPPLY: constant(uint256) = 10000000"
+  },
+  { "Feature": "Assignment", "Solidity": "v = 1;", "Vyper": "v = 1" },
+  {
+    "Feature": "Parallel assignment",
+    "Solidity": "(x, y) = (0, 1);",
+    "Vyper": "Tuple to tuple assignment not supported"
+  },
+  { "Feature": "Swap", "Solidity": "(x, y) = (y, x);", "Vyper": null },
+  {
+    "Feature": "Compound assignment",
+    "Solidity": "-=, *=, /=, %=, |=, &=, ^=",
+    "Vyper": "-=, *=, /=, %=, |=, &=, ^="
+  },
+  {
+    "Feature": "Increment and decrement",
+    "Solidity": "i++, ++i, i--, --i",
+    "Vyper": "i += 1, i -= 1"
+  },
+  {
+    "Feature": null,
+    "Solidity": "null doesn't exist in Solidity but any unitialized variables take a default value represented by 0 in memory",
+    "Vyper": "null doesn't exist in Vyper but any unitialized variables take a default value represented by 0 in memory"
+  },
+  {
+    "Feature": "Set variable to default value",
+    "Solidity": "delete v // doesn't work with mappings",
+    "Vyper": "v = empty(uint256)"
+  },
+  { "Feature": "Null test", "Solidity": "v == 0", "Vyper": "v == 0" },
+  {
+    "Feature": "Conditional expression",
+    "Solidity": "x > 0 ? x : -x",
+    "Vyper": "Conditional expression not supported"
+  },
+  { "Feature": "Contract lifecycle", "Solidity": null, "Vyper": null },
+  { "Feature": "Feature", "Solidity": "Solidity", "Vyper": "Vyper" },
+  {
+    "Feature": "Contract creation",
+    "Solidity": "Contract c = new Contract(args);",
+    "Vyper": null
+  },
+  {
+    "Feature": "Contract creation with funding",
+    "Solidity": "Contract c = new Contract{value: amount}(args);",
+    "Vyper": null
+  },
+  {
+    "Feature": "Salted contract creation (CREATE2)",
+    "Solidity": "Contract c = new Contract{salt: salt}(args);",
+    "Vyper": null
+  },
+  {
+    "Feature": "Create forwarder contract",
+    "Solidity": null,
+    "Vyper": "contract: address = create_forwarder_to(other_contract, value)"
+  },
+  {
+    "Feature": "Selfdestruct (Avoid)",
+    "Solidity": "selfdestruct(refundAddr)",
+    "Vyper": "selfdestruct(refund_addr)"
+  },
+  { "Feature": "Interfaces", "Solidity": null, "Vyper": null },
+  { "Feature": "Feature", "Solidity": "Solidity", "Vyper": "Vyper" },
+  {
+    "Feature": "Interfaces",
+    "Solidity": "interface HelloWorld {\n    function hello() external pure;\n    function world(int) external pure;\n}",
+    "Vyper": "interface HelloWorld:\n    def hello(): nonpayable\n    def world(uint256): nonpayable"
+  },
+  {
+    "Feature": "Interface type",
+    "Solidity": "interface HelloWorldWithEvent {\n    event Event();\n    function hello() external pure;\n    function world(int) external pure;\n}\n\ncontract Test {\n    bytes4 public hello_world_with_event = type(HelloWorldWithEvent).interfaceId;\n}",
+    "Vyper": null
+  },
+  { "Feature": "Operators", "Solidity": null, "Vyper": null },
+  { "Feature": "Feature", "Solidity": "Solidity", "Vyper": "Vyper" },
+  {
+    "Feature": "True and false",
+    "Solidity": "true false",
+    "Vyper": "True False"
+  },
+  { "Feature": "Falsehoods", "Solidity": "FALSE", "Vyper": "FALSE" },
+  {
+    "Feature": "Logical operators",
+    "Solidity": "&& || !",
+    "Vyper": "and or not"
+  },
+  {
+    "Feature": "Relational operators",
+    "Solidity": "` = != < > <= => `",
+    "Vyper": "` == != < > <= => `"
+  },
+  { "Feature": "Min and max", "Solidity": null, "Vyper": "max(x, y)" },
+  {
+    "Feature": "Arithmetic operators",
+    "Solidity": "` =+ - * / % ** unary- `",
+    "Vyper": "` =+ - * / % ** unary- `"
+  },
+  { "Feature": "Integer division", "Solidity": "/", "Vyper": "/" },
+  {
+    "Feature": "Bit operators",
+    "Solidity": "<< >> & | ^ ~",
+    "Vyper": "<< >> & | ^ ~"
+  },
+  {
+    "Feature": "Binary & hex literals",
+    "Solidity": "uint x = 0x52\nstring memory s = hex\"52\"",
+    "Vyper": "a: address= 0x14d465376c051Cbcd80Aa2d35Fd5df9910f80543\nb: Bytes[32]= b'\\x01\\x02\\x03\\x04\\x05\\x06... (32 bytes)\nd: Bytes[1] = 0b00010001"
+  },
+  { "Feature": "Data structures", "Solidity": null, "Vyper": null },
+  { "Feature": "Feature", "Solidity": "Solidity", "Vyper": "Vyper" },
+  {
+    "Feature": "String type",
+    "Solidity": "string",
+    "Vyper": "String[N]  # N is a fixed number"
+  },
+  {
+    "Feature": "Bytes type",
+    "Solidity": "bytes  // dynamic\nbytes1, bytes2, ..., bytes32  // packed\nbytes[N]  // N is a fixed number, unpacked",
+    "Vyper": "Bytes[N]  # N is a fixed number"
+  },
+  {
+    "Feature": "String literal",
+    "Solidity": "\"don't \\\"no\\\"\"\n'don\"t \\'no\\''\u001b",
+    "Vyper": "\"don't \\\"no\\\"\"\n'don\"t \\'no\\''"
+  },
+  {
+    "Feature": "String length",
+    "Solidity": "bytes(s).length",
+    "Vyper": "len(s)"
+  },
+  {
+    "Feature": "String literal escapes",
+    "Solidity": "\\<newline> (escapes an actual newline)\n\\\\ (backslash)\n\\' (single quote)\n\\\" (double quote)\n\\b (backspace)\n\\f (form feed)\n\\n (newline)\n\\r (carriage return)\n\\t (tab)\n\\v (vertical tab)\n\\xNN (hex escape)\n\\uNNNN (unicode escape)",
+    "Vyper": "\\<newline> (escapes an actual newline)\n\\\\ (backslash)\n\\' (single quote)\n\\\" (double quote)\n\\a (bell)\n\\b (backspace)\n\\f (form feed)\n\\n (newline)\n\\r (carriage return)\n\\t (tab)\n\\v (vertical tab)\n\\ooo (octal escape)\n\\xNN (hex escape)\n\\uNNNN (unicode escape)\n\\uNNNNNNNN (unicode escape)"
+  },
+  { "Feature": "Are strings mutable?", "Solidity": "Yes", "Vyper": "Yes" },
+  {
+    "Feature": "Slice",
+    "Solidity": "abi.decode(_payload[:4], (bytes4))\n// array slices only implemented for calldata arrays",
+    "Vyper": "slice(x, _start, _len)"
+  },
+  {
+    "Feature": "String comparison",
+    "Solidity": "keccak256(abi.encodePacked(s1)) == keccak256(abi.encodePacked(s2))",
+    "Vyper": "keccak256(s1) == keccak256(s2)"
+  },
+  {
+    "Feature": "String concatenation",
+    "Solidity": "abi.encodePacked(s1, s2)",
+    "Vyper": "concat(s1, s2)"
+  },
+  { "Feature": "Array literal", "Solidity": "[1, 2, 3]", "Vyper": "[1, 2, 3]" },
+  { "Feature": "Length", "Solidity": "a.length", "Vyper": "len(a)" },
+  { "Feature": "Empty test", "Solidity": "a.length == 0", "Vyper": null },
+  { "Feature": "Lookup", "Solidity": "a[0]", "Vyper": "a[0]" },
+  { "Feature": "Update", "Solidity": "a[0] = 1;", "Vyper": "a[0] = 1" },
+  {
+    "Feature": "Out of bounds access",
+    "Solidity": "Failing assertion",
+    "Vyper": "Failing assertion"
+  },
+  {
+    "Feature": "Add new element",
+    "Solidity": "a.push(3);  # Dynamic arrays",
+    "Vyper": null
+  },
+  {
+    "Feature": "Remove element",
+    "Solidity": "a.pop();  # Dynamic arrays",
+    "Vyper": null
+  },
+  {
+    "Feature": "Struct",
+    "Solidity": "struct Pair {\n    uint x;\n    uint y;\n}  // Creating a struct\n\nPair memory pair = Pair(2, 3);  // Instantiating a struct variable\nrequire(pair.y > pair.x);  // Accessing elements",
+    "Vyper": "struct Pair:\n    x: uint256\n    y: uint256  # Creating a struct\n\npair: Pair = Pair({x: 2, y: 3})  # Instantiating a struct variable\nassert pair.y > pair.x  # Accessing elements"
+  },
+  {
+    "Feature": "Mapping size",
+    "Solidity": "Impossible to know",
+    "Vyper": "Impossible to know"
+  },
+  { "Feature": "Lookup", "Solidity": "m[2]", "Vyper": "m[2]" },
+  { "Feature": "Update", "Solidity": "m[2] = 1;", "Vyper": "m[2] = 1" },
+  {
+    "Feature": "Missing key behaviour",
+    "Solidity": "A mapping has no concept of set keys, a mapping always refers to a hashed value that is the same for a given mapping and key",
+    "Vyper": "A mapping has no concept of set keys, a mapping always refers to a hashed value that is the same for a given mapping and key"
+  },
+  {
+    "Feature": "Delete key",
+    "Solidity": "m[2] = 0;",
+    "Vyper": "m[2] = empty(uint256)"
+  },
+  {
+    "Feature": "Immutable variables",
+    "Solidity": "uint immutable x; // have to be assigned in the constructor",
+    "Vyper": null
+  },
+  { "Feature": "Functions", "Solidity": null, "Vyper": null },
+  { "Feature": "Feature", "Solidity": "Solidity", "Vyper": "Vyper" },
+  {
+    "Feature": "Define function",
+    "Solidity": "function add2(uint x, uint y) public pure returns (uint) {\n    return x + y;\n}",
+    "Vyper": "@external\ndef add2(x: uint256, y: uint256) -> uint256:\n    return x + y"
+  },
+  {
+    "Feature": "Function argument storage location",
+    "Solidity": "function first(uint[] calldata x) public pure returns (uint) {\n    // this function doesn't copy x to memory\n    return x[0];\n}\n\nfunction first(uint[] memory x) public pure returns (uint) {\n    // this function first copies x to memory\n    return x[0];\n}",
+    "Vyper": null
+  },
+  {
+    "Feature": "Invoke function",
+    "Solidity": "add2(x, y)",
+    "Vyper": "add2(x, y)"
+  },
+  {
+    "Feature": "External function calls",
+    "Solidity": "c.f{gas: 1000, value: 4 ether}()",
+    "Vyper": "c.f()\nraw_call(address, data, outsize, gas, value, is_delegate_call)"
+  },
+  { "Feature": "Control flow", "Solidity": null, "Vyper": null },
+  { "Feature": "Feature", "Solidity": "Solidity", "Vyper": "Vyper" },
+  {
+    "Feature": "If statement",
+    "Solidity": "if (a > 2) {\n    ...\nelse if (a == 0) {\n    ...\n} else {\n    ...\n}",
+    "Vyper": "if a > 2:\n    ...\nelif a == 0:\n    ...\nelse:\n    ..."
+  },
+  {
+    "Feature": "For loop",
+    "Solidity": "for (uint i = 0; i < 3; i++) {\n    ...\n}",
+    "Vyper": "for i in range(3):\n    ..."
+  },
+  {
+    "Feature": "While loop",
+    "Solidity": "while (a > 0) {\n    ...\n}",
+    "Vyper": null
+  },
+  {
+    "Feature": "Do-While loop",
+    "Solidity": "do {\n    ...\n} while (a > 0);",
+    "Vyper": null
+  },
+  {
+    "Feature": "Return value",
+    "Solidity": "return x + y;",
+    "Vyper": "return x + y"
+  },
+  { "Feature": "Break", "Solidity": "break;", "Vyper": "break" },
+  { "Feature": "Continue", "Solidity": "continue;", "Vyper": "continue" },
+  {
+    "Feature": "Assert",
+    "Solidity": "assert(x > y);",
+    "Vyper": "assert x > y"
+  },
+  { "Feature": "Require", "Solidity": "require(x > y);", "Vyper": null },
+  {
+    "Feature": "Revert",
+    "Solidity": "require(false, \"revert reason\")",
+    "Vyper": "raise \"revert reason\""
+  },
+  {
+    "Feature": "Exception handling",
+    "Solidity": "interface DataFeed { function getData(address token) external returns (uint value); }\n\ncontract FeedConsumer {\n    DataFeed feed;\n    uint errorCount;\n    function rate(address token) public returns (uint value, bool success) {\n        // Permanently disable the mechanism if there are\n        // more than 10 errors.\n        require(errorCount < 10);\n        try feed.getData(token) returns (uint v) {\n            return (v, true);\n        } catch Error(string memory /*reason*/) {\n            // This is executed in case\n            // revert was called inside getData\n            // and a reason string was provided.\n            errorCount++;\n            return (0, false);\n        } catch (bytes memory /*lowLevelData*/) {\n            // This is executed in case revert() was used\n            // or there was a failing assertion, division\n            // by zero, etc. inside getData.\n            errorCount++;\n            return (0, false);\n        }\n    }\n}",
+    "Vyper": null
+  },
+  { "Feature": "Misc", "Solidity": null, "Vyper": null },
+  { "Feature": "Feature", "Solidity": "Solidity", "Vyper": "Vyper" },
+  {
+    "Feature": "Comments",
+    "Solidity": "NatSpec conventions for functions:\n\n/// @author \n/// @notice \n/// @dev \n/// @param \n/// @return\n\nEvents:\n\n/// The address `participant` just registered for the gathering.\nevent Registered(address participant);\n\nSpecial inheritance syntax for contracts:\n\n/// @inheritdoc OtherContract",
+    "Vyper": "def foo():\n    \"\"\"\n    @author  \n    @notice \n    @dev \n    @param  \n    @return  \n    \"\"\"\n    ..."
+  },
+  {
+    "Feature": "Payment with error on failure (Avoid for Solidity)",
+    "Solidity": "address.transfer()",
+    "Vyper": "send(address, value)"
+  },
+  {
+    "Feature": "Payment with false on failure (Avoid for Solidity)",
+    "Solidity": "address.send()",
+    "Vyper": null
+  },
+  {
+    "Feature": "Payment with gas forwarding (WARNING)",
+    "Solidity": "address.call.value().gas()()",
+    "Vyper": "raw_call(address, data, outsize, gas, value, is_delegate_call)"
+  },
+  {
+    "Feature": "Event logging",
+    "Solidity": "event Deposit(\n    address indexed _from,\n    bytes32 indexed _id,\n    uint _value\n);\n\nemit Deposit(msg.sender, _id, msg.value);",
+    "Vyper": "event Deposit:\n    _from: indexed(address)\n    _id: indexed(bytes32)\n    _value: uint256\n\nlog Deposit(msg.sender, _id, msg.value)"
+  },
+  {
+    "Feature": "Units, global constants and type ranges",
+    "Solidity": "1 ether\n1 finney\n1 szabo\n1 wei\n1 gwei\n1 seconds\n1 minutes\n1 hours\n1 days\n1 weeks\n1 years  // deprecated\ntype(uint).min\ntype(uint).max\ntype(int8).min\ntype(int8).max\n...",
+    "Vyper": "ZERO_ADDRESS\nas_wei_value(1, \"finney\")\nas_wei_value(1, \"szabo\")\nas_wei_value(1, \"wei\")\nas_wei_value(1, \"babbage\")\nas_wei_value(1, \"shannon\")\nEMPTY_BYTES32\nMAX_INT128\nMIN_INT128\nMAX_DECIMAL\nMIN_DECIMAL\nMAX_UINT256\nZERO_WEI"
+  },
+  {
+    "Feature": "Block and transaction properties",
+    "Solidity": "blockhash(blockNumber)\nblock.coinbase\nblock.difficulty\nblock.gaslimit\nblock.number\n\nblock.timestamp\nnow  // alias for block.timestamp\ngasleft()\nmsg.data\nmsg.gas\nmsg.sender\nmsg.sig\nmsg.value\ntx.gasprice\ntx.origin",
+    "Vyper": "blockhash(blockNumber)\nblock.coinbase\nblock.difficulty\n\nblock.number\nblock.prevhash  # Same as blockhash(block.number - 1)\nblock.timestamp\n\n\n\nmsg.gas\nmsg.sender\n\nmsg.value\n\ntx.origin"
+  }
+]
